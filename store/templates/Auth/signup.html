@@ -1,0 +1,53 @@
+{% extends 'Auth/base.html' %}
+
+{% block content %}
+
+
+{% if error %}
+{{ error }}
+
+<br/>
+<br/>
+{% endif %}
+
+<h1>Signup!</h1>
+
+<form method = "POST" action="{% url 'signup' %}">
+    {% csrf_token %}
+    Username:
+    <br/>
+    <input type="text" name="username" />
+    <br/>
+
+    First_name:
+    <br/>
+    <input type="text" name="first_name" />
+    <br/>
+    Last_name:
+    <br/>
+    <input type="text" name="last_name" />
+    <br/>
+    Email:
+    <br/>
+    <input type="text" name="email" />
+    <br/>
+    Mobile:
+    <br/>
+    <input type="tel" name="mobile" />
+    <br/>
+
+    Password:
+    <br/>
+    <input type="password" name="password" />
+    <br/>
+    
+    <br/>
+    <input class ="btn btn-primary" type="submit" value= "signup" />
+    <br/>
+
+
+
+</form>
+
+
+{% endblock %}
