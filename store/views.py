@@ -13,12 +13,14 @@ from Ecomerce_project.settings import EMAIL_HOST_USER
 from django.views.decorators.csrf import csrf_exempt
 import random
 
+# Home Page 
 def home(request):
     return render(request,'Auth/base.html')
 
+# Creating Register Page and Storing Data into DataBase
 @csrf_exempt
 @transaction.atomic
-# @api_view(['POST'])
+# @api_view(['POST'])    # Uncomment this to See in API view
 def signup(request):
     if request.method == "POST":
 
@@ -49,15 +51,15 @@ def signup(request):
     else:
         return render(request,'Auth/signup.html')
 
+# Login Page 
 @csrf_exempt
 @transaction.atomic
-# @api_view(['POST'])
+# @api_view(['POST'])   # Uncomment this to See in API view
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
-        # user = auth.authenticate(username=request.POST['username'],password = request.POST['password'])
         user = auth.authenticate(username = username, password = password)
         if user is not None:
             auth.login(request,user)
@@ -71,16 +73,8 @@ def login(request):
     else:
         return render(request,'Auth/login.html')
 
-# def details(request,pk):
-#     if request.method == 'GET':
-#         user = User_profile.objects.filter(id = pk)
-#         return Response({
-#             'username' : User_profile.username,
-#             'firstname' : User_profile.first_name
-#         })
 
 def logout(request):
-    # if request.method == 'POST':
     auth.logout(request)
     return redirect('home')
 
